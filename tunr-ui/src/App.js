@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import UsersList from './components/UsersList'
-import NewUserForm from './components/NewUserForm'
 import Homepage from './container/Homepage'
 import Resultspage from "./container/Resultspage";
 
@@ -12,67 +10,36 @@ import './App.css';
 
 class App extends Component {
 
-    state = {
-        users: [],
-        results: []
-    }
+        // constructor(props) {
+        //     super(props);
+        //     this.updateResults = this.updateResults.bind(this)
+        //     this.state = { results: [] }
+        // }
 
-    // async componentWillMount() {
-    //     const usersResponse = await axios.get('/users')
-    //     this.setState({
-    //         users: usersResponse.data,
-    //         usersResponse
-    //     })
-    // }
-
-    // deleteUser = async (userId, index) => {
-    //     try {
-    //         await axios.delete(`/users/${userId}`)
-
-    //         const updatedUsersList = [...this.state.users]
-    //         updatedUsersList.splice(index, 1)
-
-    //         this.setState({users: updatedUsersList})
-
-    //     } catch (error) {
-    //         console.log(`Error deleting User with ID: ${userId}`)
-    //     }
-    // }
-
-    // createUser = async (newUser) => {
-    //     try {
-    //         const newUserResponse = await axios.post('/users', newUser)
-    //         const newUserFromDatabase = newUserResponse.data
-
-    //         const updatedUsersList = [...this.state.users]
-    //         updatedUsersList.push(newUserFromDatabase)
-
-    //         this.setState({users: updatedUsersList})
-
-    //     } catch (error) {
-    //         console.log("Error creating new User")
-    //     }
-    // }
+        // updateResults(newData){
+        //     console.log(newData)
+        //     this.setState({results : newData})
+        //     console.log("state results: "+this.state.results);
+        //     this.state.results.map( data => {
+        //         console.log(data)
+        //     })
+        // }
 
     render() {
 
-        // const UsersListComponent = () => (
-        //     <UsersList
-        //         users={this.state.users}
-        //         deleteUser={this.deleteUser}/>
-        // )
+        const Home = () => (
+            <Homepage
+            // results={this.state.results}
+            // updateResults={this.updateResults}
+            />
+        )
 
-        // const NewUserFormComponent = () => (
-        //     <NewUserForm createUser={this.createUser}/>
-        // )
 
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" render={Homepage } />
-                    <Route exact path="/results" render={Resultspage}/>
-                    {/* <Route exact path="/userlist" render={UsersListComponent}/> */}
-                    {/* <Route exact path="/new" render={NewUserFormComponent}/> */}
+                    <Route exact path="/" render={Home} />
+                    {/* <Route exact path="/results" render={Resultspage}/> */}
                 </Switch>
             </Router>
         )

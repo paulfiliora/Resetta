@@ -33,8 +33,9 @@ async queryURL () {
       +this.state.app_id
       +this.state.api_key
     )
-    this.setState({ results: response.data.hits })
-    console.log(this.state.results)
+    this.props.updateResults(response.data.hits)
+    // this.setState({ results: response.data.hits })
+    // console.log(this.state.results)
   }
   catch(error) {
     console.log('Error retrieving query!')
@@ -43,6 +44,7 @@ async queryURL () {
 };
 
   render(){
+    // console.log(this)
     
     return(
       <Form onSubmit={this.handleSubmit}>
@@ -56,4 +58,4 @@ async queryURL () {
   }
 }
 
-export default SearchBar
+// expo SearchBar
