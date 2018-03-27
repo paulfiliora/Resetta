@@ -1,4 +1,4 @@
-package com.example.usersapi;
+package com.example.favoritesapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

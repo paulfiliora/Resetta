@@ -5,6 +5,8 @@ import HomepageBody2 from "../components/Homepage/HomepageBody2";
 import HomepageFooter from "../components/Homepage/HomepageFooter";
 import { ResponsiveContainer } from "../components/Homepage/HomepageHeading";
 
+import axios from 'axios';
+
 class Homepage extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +16,23 @@ class Homepage extends Component {
 
   updateResults(newData) {
     this.setState({ results: newData });
-    // this.state.results.map( data => {
-    //     console.log(data)
-    // })
+    this.state.results.map( data => {
+        console.log(data)
+    })
+  }
+
+  createFavorite = async (favorite, index) => {
+    try {
+        const newFavoriteResponse = await axios.post(`/favorites`, favorite)
+
+        const updatedFavoritesList = [...this.state.favorites]
+        updatedFavoritesList.push(newFavoriteResponse.data)
+        this.setState({favorites: updatedFavoritesList})
+
+    } catch(error) {
+        console.log('Error creating new Favorite!')
+        console.log(error)
+    }
   }
 
   render() {
