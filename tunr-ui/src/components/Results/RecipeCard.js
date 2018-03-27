@@ -32,7 +32,7 @@ export class RecipeCard extends Component {
     }
     this.setState({ active: !this.state.active })
     this.setState({ newFavorite: incomingFavorite }, () => {
-      console.log(this.state.newFavorite)
+      // console.log(this.state.newFavorite)
       this.createFavorite(this.state.newFavorite)
     })
     

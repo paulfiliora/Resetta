@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 import {
   Button,
   Container,
@@ -12,43 +13,34 @@ import {
   Sidebar,
   Visibility
 } from "semantic-ui-react";
-import { SearchBar } from "../SearchBar";
+import HomepageFooter from "../components/Homepage/HomepageFooter";
 
-import HomepageBody from "./HomepageBody";
-import HomepageBody2 from "./HomepageBody2";
-import HomepageFooter from "./HomepageFooter";
+import axios from "axios";
 
-import RecipeList from "../Results/RecipeList";
+import FavoritesList from "../components/Favorites/FavoritesLIst";
 
-class HomepageHeading extends Component {
-  render() {
-    return (
-      <Container text>
-        <Header
-          as="h1"
-          content="Resetta"
-          inverted
-          style={{
-            fontSize: this.props.mobile ? "2em" : "4em",
-            fontWeight: "normal",
-            marginBottom: 0,
-            marginTop: this.props.mobile ? "1.5em" : "3em"
-          }}
-        />
-        <SearchBar updateResults={this.props.updateResults} />
-      </Container>
-    );
-  }
-}
+const HomepageHeading = ({ mobile }) => (
+  <Container text>
+    <Header
+      as="h1"
+      content="Favorites"
+      inverted
+      style={{
+        fontSize: mobile ? "2em" : "4em",
+        fontWeight: "normal",
+        marginBottom: 0,
+        marginTop: mobile ? "1.5em" : "3em"
+      }}
+    />
+  </Container>
+);
 
 HomepageHeading.propTypes = {
   mobile: PropTypes.bool
 };
 
-/* 
- * Custom Responsive containers
- */
-export class DesktopContainer extends Component {
+/*  Custom Responsive containers  */
+class DesktopContainer extends Component {
   state = {};
 
   hideFixedMenu = () => this.setState({ fixed: false });
@@ -80,10 +72,10 @@ export class DesktopContainer extends Component {
               size="large"
             >
               <Container>
-                <Menu.Item active>
+                <Menu.Item >
                   <Link to="/">Home</Link>
                 </Menu.Item>
-                <Menu.Item >
+                <Menu.Item active>
                   <Link to="/Favorites">Favorites</Link>
                 </Menu.Item>
                 <Menu.Item position="right">
@@ -101,9 +93,10 @@ export class DesktopContainer extends Component {
                 </Menu.Item>
               </Container>
             </Menu>
-            <HomepageHeading updateResults={this.props.updateResults} />
+            <HomepageHeading />
           </Segment>
         </Visibility>
+
         {children}
       </Responsive>
     );
@@ -114,7 +107,7 @@ DesktopContainer.propTypes = {
   children: PropTypes.node
 };
 
-export class MobileContainer extends Component {
+class MobileContainer extends Component {
   state = {};
 
   handlePusherClick = () => {
@@ -140,10 +133,10 @@ export class MobileContainer extends Component {
             vertical
             visible={sidebarOpened}
           >
-            <Menu.Item active>
+            <Menu.Item >
               <Link to="/">Home</Link>
             </Menu.Item>
-            <Menu.Item >
+            <Menu.Item active>
               <Link to="/Favorites">Favorites</Link>
             </Menu.Item>
             <Menu.Item as="a">Log in</Menu.Item>
@@ -177,10 +170,7 @@ export class MobileContainer extends Component {
                   </Menu.Item>
                 </Menu>
               </Container>
-              <HomepageHeading
-                mobile
-                updateResults={this.props.updateResults}
-              />
+              <HomepageHeading mobile />
             </Segment>
 
             {children}
@@ -195,33 +185,44 @@ MobileContainer.propTypes = {
   children: PropTypes.node
 };
 
-export class ResponsiveContainer extends Component {
-  render() {
-    return (
-      <div>
-        <DesktopContainer updateResults={this.props.updateResults}>
-          {this.props.results[0] ? (
-            <RecipeList results={this.props.results} />
-          ) : (
-            <HomepageBody />
-          )}
-          {this.props.results[0] ? "" : <HomepageBody2 />}
-          <HomepageFooter />
-        </DesktopContainer>
-        <MobileContainer updateResults={this.props.updateResults}>
-          {this.props.results[0] ? (
-            <RecipeList results={this.props.results} />
-          ) : (
-            <HomepageBody />
-          )}
-          {this.props.results[0] ? "" : <HomepageBody2 />}
-          <HomepageFooter />
-        </MobileContainer>
-      </div>
-    );
-  }
-}
+const ResponsiveContainer = ({ children }) => (
+  <div>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
+  </div>
+);
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node
 };
+
+class Favorites extends Component {
+    state = {
+        favorites: []
+    }
+
+    async componentWillMount() {
+        try {
+            const response = await axios.get('/favorites')
+            this.setState({ favorites: response.data })
+        } catch (error) {
+            console.log('Error retrieving sales data!')
+            console.log(error)
+        }
+    }
+
+  render() {
+    //   console.log(this.state.favorites)
+    return (
+      <ResponsiveContainer>
+        <Segment style={{ padding: "8em 0em" }} vertical>
+            <FavoritesList favorites={this.state.favorites} />
+        </Segment>
+
+        <HomepageFooter />
+      </ResponsiveContainer>
+    );
+  }
+}
+
+export default Favorites;

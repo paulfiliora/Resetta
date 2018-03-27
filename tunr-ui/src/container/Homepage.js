@@ -16,9 +16,9 @@ class Homepage extends Component {
 
   updateResults(newData) {
     this.setState({ results: newData });
-    this.state.results.map( data => {
-        console.log(data)
-    })
+    // this.state.results.map( data => {
+    //     console.log(data)
+    // })
   }
 
   createFavorite = async (favorite, index) => {
