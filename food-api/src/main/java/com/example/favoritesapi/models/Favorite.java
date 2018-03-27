@@ -20,15 +20,15 @@ public class Favorite {
 	private String image_url;
 
 	@Column(name = "API_URI")
-	private String api_url;
+	private String api_uri;
 
 	@Column(name = "USER_ID")
 	private String user_id;
 
-	public Favorite(String label, String image_url, String api_url, String user_id) {
+	public Favorite(String label, String image_url, String api_uri, String user_id) {
 		this.label = label;
 		this.image_url = image_url;
-		this.api_url = api_url;
+		this.api_uri = api_uri;
 		this.user_id = user_id;
 	}
 }

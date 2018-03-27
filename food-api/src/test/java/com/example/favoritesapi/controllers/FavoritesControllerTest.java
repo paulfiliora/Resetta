@@ -49,13 +49,15 @@ public class FavoritesControllerTest {
 		Favorite firstFavorite = new Favorite(
 			"favorite1",
 			"f1image",
-			"f1api"
+			"f1api",
+				"1"
 		);
 
 		Favorite secondFavorite = new Favorite(
 			"favorite2",
 			"f2image",
-			"f2api"
+			"f2api",
+				"1"
 		);
 
 		List<Favorite> mockFavorites =
@@ -69,14 +71,16 @@ public class FavoritesControllerTest {
 		newFavorite = new Favorite(
 			"new_favorite_for_create",
 			"new_fav_image",
-			"new_fav_api"
+			"new_fav_api",
+				"1"
 		);
 		given(mockFavoriteRepository.save(newFavorite)).willReturn(newFavorite);
 
 		updatedSecondFavorite = new Favorite(
 			"updated_favorite",
 			"updated_fav_image",
-			"updated_fav_api"
+			"updated_fav_api",
+				"1"
 		);
 		given(mockFavoriteRepository.save(updatedSecondFavorite)).willReturn(updatedSecondFavorite);
 
@@ -124,7 +128,7 @@ public class FavoritesControllerTest {
 
 		this.mockMvc
 			.perform(get("/"))
-			.andExpect(jsonPath("$[0].api_url", is("f1api")));
+			.andExpect(jsonPath("$[0].api_uri", is("f1api")));
 	}
 
 	@Test
@@ -156,7 +160,7 @@ public class FavoritesControllerTest {
 
 		this.mockMvc
 			.perform(get("/1"))
-			.andExpect(jsonPath("$.api_url", is("f1api")));
+			.andExpect(jsonPath("$.api_uri", is("f1api")));
 	}
 
 	@Test
@@ -244,7 +248,7 @@ public class FavoritesControllerTest {
 					.contentType(MediaType.APPLICATION_JSON)
 					.content(jsonObjectMapper.writeValueAsString(newFavorite))
 			)
-			.andExpect(jsonPath("$.api_url", is("new_fav_api")));
+			.andExpect(jsonPath("$.api_uri", is("new_fav_api")));
 	}
 
 
@@ -293,7 +297,7 @@ public class FavoritesControllerTest {
 					.contentType(MediaType.APPLICATION_JSON)
 					.content(jsonObjectMapper.writeValueAsString(updatedSecondFavorite))
 			)
-			.andExpect(jsonPath("$.api_url", is("updated_fav_api")));
+			.andExpect(jsonPath("$.api_uri", is("updated_fav_api")));
 	}
 
 	@Test

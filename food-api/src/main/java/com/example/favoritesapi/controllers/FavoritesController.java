@@ -57,7 +57,7 @@ public class FavoritesController {
 
 		favoriteFromDb.setLabel(favoriteRequest.getLabel());
 		favoriteFromDb.setImage_url(favoriteRequest.getImage_url());
-		favoriteFromDb.setApi_url(favoriteRequest.getApi_url());
+		favoriteFromDb.setApi_uri(favoriteRequest.getApi_uri());
 		favoriteFromDb.setUser_id(favoriteRequest.getUser_id());
 
 		return favoriteRepository.save(favoriteFromDb);

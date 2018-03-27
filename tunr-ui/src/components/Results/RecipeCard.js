@@ -5,7 +5,8 @@ import axios from 'axios';
 export class RecipeCard extends Component {
 
   state = {
-    newFavorite: {}
+    newFavorite: {},
+    favorites: {}
   }
 
   createFavorite = async (favorite, index) => {
@@ -23,20 +24,20 @@ export class RecipeCard extends Component {
   }
 
   handleClick = () => {
-    const newFavorite = [
-      {label:this.props.recipe.label},
-      {image_url:this.props.recipe.image},
-      {api_uri:this.props.recipe.uri}
-    ]
-    console.log(newFavorite)
+    const incomingFavorite = {
+      'label':this.props.recipe.label,
+      'image_url':this.props.recipe.image,
+      'api_uri':this.props.recipe.uri,
+      'user_id':'1'
+    }
     this.setState({ active: !this.state.active })
+    this.setState({ newFavorite: incomingFavorite }, () => {
+      console.log(this.state.newFavorite)
+      this.createFavorite(this.state.newFavorite)
+    })
+    
   }
 
-  // handleClick. pass along object from event.target. store in state. then POST
-  handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.createFavorite(this.state.newFavorite)
-};
 
   render() {
 

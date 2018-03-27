@@ -1,5 +1,5 @@
 INSERT INTO FAVORITES
-  (LABEL, IMAGE_URL, API_URI)
+  (LABEL, IMAGE_URL, API_URI, USER_ID)
 VALUES
   ('label from seeds', 'Ima', 'api', '1'),
   ('another label', 'Ura', 'api', '1'),
