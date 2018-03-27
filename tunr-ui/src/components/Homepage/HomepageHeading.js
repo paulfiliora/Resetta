@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 import {
   Button,
   Container,
@@ -9,198 +9,214 @@ import {
   Responsive,
   Segment,
   Sidebar,
-  Visibility,
-} from 'semantic-ui-react'
-import {SearchBar} from '../SearchBar'
+  Visibility
+} from "semantic-ui-react";
+import { SearchBar } from "../SearchBar";
 
-import HomepageBody from './HomepageBody'
-import HomepageBody2 from './HomepageBody2'
-import HomepageFooter from './HomepageFooter'
+import HomepageBody from "./HomepageBody";
+import HomepageBody2 from "./HomepageBody2";
+import HomepageFooter from "./HomepageFooter";
 
-// const HomepageHeading = ({ mobile }) => (
-class HomepageHeading extends Component{
+import RecipeList from "../Results/RecipeList";
 
-  render(){
-
+class HomepageHeading extends Component {
+  render() {
     return (
       <Container text>
-    <Header
-      as='h1'
-      content='Resetta'
-      inverted
-      style={{
-        fontSize: this.props.mobile ? '2em' : '4em',
-        fontWeight: 'normal',
-        marginBottom: 0,
-        marginTop: this.props.mobile ? '1.5em' : '3em',
-      }}
-      />
-    <SearchBar updateResults={this.props.updateResults}/>
-    </Container>
-    )
+        <Header
+          as="h1"
+          content="Resetta"
+          inverted
+          style={{
+            fontSize: this.props.mobile ? "2em" : "4em",
+            fontWeight: "normal",
+            marginBottom: 0,
+            marginTop: this.props.mobile ? "1.5em" : "3em"
+          }}
+        />
+        <SearchBar updateResults={this.props.updateResults} />
+      </Container>
+    );
   }
 }
-//   return (
-
-//     <Container text>
-//     <Header
-//       as='h1'
-//       content='Resetta'
-//       inverted
-//       style={{
-//         fontSize: mobile ? '2em' : '4em',
-//         fontWeight: 'normal',
-//         marginBottom: 0,
-//         marginTop: mobile ? '1.5em' : '3em',
-//       }}
-//       />
-//     <SearchBar/>
-//   </Container>
-//     )
-// )
 
 HomepageHeading.propTypes = {
-  mobile: PropTypes.bool,
-}
+  mobile: PropTypes.bool
+};
 
 /* 
  * Custom Responsive containers
  */
 export class DesktopContainer extends Component {
-  state = {}
+  state = {};
 
-  hideFixedMenu = () => this.setState({ fixed: false })
-  showFixedMenu = () => this.setState({ fixed: true })
+  hideFixedMenu = () => this.setState({ fixed: false });
+  showFixedMenu = () => this.setState({ fixed: true });
 
   render() {
-    const { children } = this.props
-    const { fixed } = this.state
+    const { children } = this.props;
+    const { fixed } = this.state;
 
     return (
       <Responsive {...Responsive.onlyComputer}>
-        <Visibility once={false} onBottomPassed={this.showFixedMenu} onBottomPassedReverse={this.hideFixedMenu}>
-          <Segment className='banner' inverted textAlign='center' style={{ minHeight: 700, padding: '1em 0em' }} vertical>
+        <Visibility
+          once={false}
+          onBottomPassed={this.showFixedMenu}
+          onBottomPassedReverse={this.hideFixedMenu}
+        >
+          <Segment
+            className="banner"
+            inverted
+            textAlign="center"
+            style={{ minHeight: 700, padding: "1em 0em" }}
+            vertical
+          >
             <Menu
-              fixed={fixed ? 'top' : null}
+              fixed={fixed ? "top" : null}
               inverted={!fixed}
               pointing={!fixed}
               secondary={!fixed}
-              size='large'
+              size="large"
             >
               <Container>
-                <Menu.Item as='a' active>Home</Menu.Item>
-                <Menu.Item as='a'>Collections</Menu.Item>
-                <Menu.Item position='right'>
-                  <Button as='a' inverted={!fixed}>Log in</Button>
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>Sign Up</Button>
+                <Menu.Item as="a" active>
+                  Home
+                </Menu.Item>
+                <Menu.Item as="a">Collections</Menu.Item>
+                <Menu.Item position="right">
+                  <Button as="a" inverted={!fixed}>
+                    Log in
+                  </Button>
+                  <Button
+                    as="a"
+                    inverted={!fixed}
+                    primary={fixed}
+                    style={{ marginLeft: "0.5em" }}
+                  >
+                    Sign Up
+                  </Button>
                 </Menu.Item>
               </Container>
             </Menu>
-            <HomepageHeading updateResults={this.props.updateResults}/>
+            <HomepageHeading updateResults={this.props.updateResults} />
           </Segment>
         </Visibility>
-
         {children}
       </Responsive>
-    )
+    );
   }
 }
 
 DesktopContainer.propTypes = {
-  children: PropTypes.node,
-}
+  children: PropTypes.node
+};
 
 export class MobileContainer extends Component {
-  state = {}
+  state = {};
 
   handlePusherClick = () => {
-    const { sidebarOpened } = this.state
+    const { sidebarOpened } = this.state;
 
-    if (sidebarOpened) this.setState({ sidebarOpened: false })
-  }
+    if (sidebarOpened) this.setState({ sidebarOpened: false });
+  };
 
-  handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened })
+  handleToggle = () =>
+    this.setState({ sidebarOpened: !this.state.sidebarOpened });
 
   render() {
-    // console.log(this)
-
-    const { children } = this.props
-    const { sidebarOpened } = this.state
+    const { children } = this.props;
+    const { sidebarOpened } = this.state;
 
     return (
       <Responsive {...Responsive.onlyMobile}>
         <Sidebar.Pushable>
-          <Sidebar as={Menu} animation='uncover' inverted vertical visible={sidebarOpened}>
-            <Menu.Item as='a' active>Home</Menu.Item>
-            <Menu.Item as='a'>Collections</Menu.Item>
-            <Menu.Item as='a'>Log in</Menu.Item>
-            <Menu.Item as='a'>Sign Up</Menu.Item>
+          <Sidebar
+            as={Menu}
+            animation="uncover"
+            inverted
+            vertical
+            visible={sidebarOpened}
+          >
+            <Menu.Item as="a" active>
+              Home
+            </Menu.Item>
+            <Menu.Item as="a">Collections</Menu.Item>
+            <Menu.Item as="a">Log in</Menu.Item>
+            <Menu.Item as="a">Sign Up</Menu.Item>
           </Sidebar>
 
-          <Sidebar.Pusher dimmed={sidebarOpened} onClick={this.handlePusherClick} style={{ minHeight: '100vh' }}>
-            <Segment className="banner" inverted textAlign='center' style={{ minHeight: 350, padding: '1em 0em' }} vertical>
+          <Sidebar.Pusher
+            dimmed={sidebarOpened}
+            onClick={this.handlePusherClick}
+            style={{ minHeight: "100vh" }}
+          >
+            <Segment
+              className="banner"
+              inverted
+              textAlign="center"
+              style={{ minHeight: 350, padding: "1em 0em" }}
+              vertical
+            >
               <Container>
-                <Menu inverted pointing secondary size='large'>
+                <Menu inverted pointing secondary size="large">
                   <Menu.Item onClick={this.handleToggle}>
-                    <Icon name='sidebar' />
+                    <Icon name="sidebar" />
                   </Menu.Item>
-                  <Menu.Item position='right'>
-                    <Button as='a' inverted>Log in</Button>
-                    <Button as='a' inverted style={{ marginLeft: '0.5em' }}>Sign Up</Button>
+                  <Menu.Item position="right">
+                    <Button as="a" inverted>
+                      Log in
+                    </Button>
+                    <Button as="a" inverted style={{ marginLeft: "0.5em" }}>
+                      Sign Up
+                    </Button>
                   </Menu.Item>
                 </Menu>
               </Container>
-              <HomepageHeading mobile updateResults={this.props.updateResults} />
+              <HomepageHeading
+                mobile
+                updateResults={this.props.updateResults}
+              />
             </Segment>
 
             {children}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Responsive>
-    )
+    );
   }
 }
 
 MobileContainer.propTypes = {
-  children: PropTypes.node,
-}
-
-// export const ResponsiveContainer = ({ children }) => (
-//   <div>
-//     <DesktopContainer>{children}</DesktopContainer>
-//     <MobileContainer>{children}</MobileContainer>
-//   </div>
-// )
+  children: PropTypes.node
+};
 
 export class ResponsiveContainer extends Component {
-
-// componentWillUpdate(nextProps){
-//  if (this.props.results == nextProps.results){
-//    this.setState()
-//  }
-// }
-
-  render(){
-    console.log(this)
-    return(
-    <div>
-      <DesktopContainer updateResults={this.props.updateResults}>
-        {this.props.results[0] ? <HomepageBody2/>:<HomepageBody/>}
-        <HomepageBody2/>
-        <HomepageFooter/>
-      </DesktopContainer>
-      <MobileContainer updateResults={this.props.updateResults}>
-        <HomepageBody/>
-        <HomepageBody2/>
-        <HomepageFooter/>
-      </MobileContainer>
-    </div>
-    )
+  render() {
+    return (
+      <div>
+        <DesktopContainer updateResults={this.props.updateResults}>
+          {this.props.results[0] ? (
+            <RecipeList results={this.props.results} />
+          ) : (
+            <HomepageBody />
+          )}
+          {this.props.results[0] ? "" : <HomepageBody2 />}
+          <HomepageFooter />
+        </DesktopContainer>
+        <MobileContainer updateResults={this.props.updateResults}>
+          {this.props.results[0] ? (
+            <RecipeList results={this.props.results} />
+          ) : (
+            <HomepageBody />
+          )}
+          {this.props.results[0] ? "" : <HomepageBody2 />}
+          <HomepageFooter />
+        </MobileContainer>
+      </div>
+    );
   }
-
 }
-
 
 ResponsiveContainer.propTypes = {
-  children: PropTypes.node,
-}
+  children: PropTypes.node
+};

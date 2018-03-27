@@ -5,12 +5,8 @@ import {
   Segment,
 } from 'semantic-ui-react'
 
-const HomepageBody2 = () => {
-  console.log('rendered homebody2')
-
- 
+const HomepageBody2 = () => { 
     return (
-
         <Segment style={{ padding: '0em' }} vertical>
           <Grid celled='internally' columns='equal' stackable>
             <Grid.Row textAlign='center'>
@@ -28,8 +24,6 @@ const HomepageBody2 = () => {
           </Grid>
         </Segment>
    )
-  
 }
-
 
 export default HomepageBody2
