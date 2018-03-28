@@ -26,6 +26,9 @@ This project depends upon . Make sure you have all of these dependencies install
 -------
 
 ![Home](https://i.imgur.com/YNgPSzu.png)
+-------
 ![Search](https://i.imgur.com/NReOr0Z.png)
+-------
 ![Details](https://i.imgur.com/fGe95LQ.png)
+-------
 ![Favorites](https://i.imgur.com/2r6iK3p.png)
