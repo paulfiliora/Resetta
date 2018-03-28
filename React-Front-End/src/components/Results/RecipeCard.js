@@ -108,7 +108,7 @@ export class RecipeCard extends Component {
             <Button color='black' onClick={this.close}>
               Nope
             </Button>
-            <Button positive icon='checkmark' labelPosition='right' content="See Nutrition" onClick={this.close} />
+            <Button positive icon='checkmark' labelPosition='right' content="See Recipe" target='_blank' href={recipe.url}  onClick={this.close} />
           </Modal.Actions>
         </Modal>
 
