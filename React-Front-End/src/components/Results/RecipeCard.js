@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Card, Icon, Image, Button, Modal, Header } from "semantic-ui-react";
+import { Card, Icon, Image, Button, Modal, Header, List } from "semantic-ui-react";
 import axios from "axios";
+import RecipeItems from "./RecipeItems"
 
 export class RecipeCard extends Component {
   state = {
@@ -37,17 +38,29 @@ export class RecipeCard extends Component {
 
   show = dimmer => () => this.setState({ dimmer, open: true })
   close = () => this.setState({ open: false })
-
+  
   render() {
     const { active } = this.state;
     const recipe = this.props.recipe;
 
     const { open, dimmer } = this.state
 
+    const inlineStyle = {
+      modal : {
+        marginTop: '0px !important',
+        marginLeft: 'auto',
+        marginRight: 'auto'
+      }
+    };
+
+    // console.log(recipe)
+
+    const cals = Number.parseInt(recipe.calories, 10)/recipe.yield
+
 
     return (
       <Card >
-        <Image src={recipe.image} />
+        <Image onClick={this.show('blurring')} src={recipe.image} />
         <Card.Content>
           <Card.Header>{recipe.label}</Card.Header>
           <Card.Meta>
@@ -74,21 +87,28 @@ export class RecipeCard extends Component {
           </a>
         </Card.Content>
 
-                <Modal dimmer={dimmer} open={open} onClose={this.close}>
-          <Modal.Header>Select a Photo</Modal.Header>
+        <Modal dimmer={dimmer} open={open} onClose={this.close} style={inlineStyle.modal}>
+          <Modal.Header>{recipe.label}</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src='/assets/images/avatar/large/rachel.png' />
+            <Image wrapped size='medium' src={recipe.image} />
             <Modal.Description>
-              <Header>Default Profile Image</Header>
-              <p>We've found the following gravatar image associated with your e-mail address.</p>
-              <p>Is it okay to use this photo?</p>
+              <Header as='h4'>Calories: {cals}</Header>
+              <Header as='h4'>Yields: {recipe.yield}</Header>
+
+
+              <Header>Ingredients</Header>
+              <List bulleted>
+                {recipe.ingredients.map((ingredient, index) => {
+                return <RecipeItems {...ingredient} key={index} index={index} />;
+                })}
+              </List>              
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
             <Button color='black' onClick={this.close}>
               Nope
             </Button>
-            <Button positive icon='checkmark' labelPosition='right' content="Yep, that's me" onClick={this.close} />
+            <Button positive icon='checkmark' labelPosition='right' content="See Nutrition" onClick={this.close} />
           </Modal.Actions>
         </Modal>
 

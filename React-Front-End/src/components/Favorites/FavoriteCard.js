@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { Card, Image } from "semantic-ui-react";
+import { Button, Card, Image, Popup } from "semantic-ui-react";
 
 export class RecipeCard extends Component {
+  handleClick = () => {
+    console.log("clicked");
+  };
+
   render() {
     const favorite = this.props;
     // console.log(this.props)
@@ -16,6 +20,20 @@ export class RecipeCard extends Component {
           </Card.Meta>
           <Card.Description>
             Description
+            <a>
+              <Popup
+                trigger={
+                  <Button
+                    onClick={this.handleClick}
+                    floated="right"
+                    color="red"
+                    circular
+                    icon="delete"
+                  />
+                }
+                content="Delete from favorites"
+              />
+            </a>
           </Card.Description>
         </Card.Content>
       </Card>

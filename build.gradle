@@ -53,12 +53,12 @@ task runUsersAPITests(type: Exec) {
 }
 
 task startUIDevServer(type: Exec) {
-    workingDir './tunr-ui'
+    workingDir './React-Front-End'
     commandLine 'pm2', 'start', 'node_modules/react-scripts/scripts/start.js', '-f', '--name', 'tunr-ui-test'
 }
 
 task stopUIDevServer(type: Exec) {
-    workingDir './tunr-ui'
+    workingDir './React-Front-End'
     commandLine 'pm2', 'stop', 'tunr-ui-test'
 }
 
