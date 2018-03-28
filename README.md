@@ -24,11 +24,14 @@ This project depends upon . Make sure you have all of these dependencies install
 * Add items to a favorites list stored in a database
 
 -------
-
+Home
 ![Home](https://i.imgur.com/YNgPSzu.png)
 -------
+Search
 ![Search](https://i.imgur.com/NReOr0Z.png)
 -------
+Details
 ![Details](https://i.imgur.com/fGe95LQ.png)
 -------
+Favorites
 ![Favorites](https://i.imgur.com/2r6iK3p.png)
