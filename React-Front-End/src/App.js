@@ -10,7 +10,6 @@ class App extends Component {
     const Home = () => <Homepage />;
     const Favs = () => <Favorites />;
 
-
     return (
       <Router>
         <Switch>

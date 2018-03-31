@@ -20,6 +20,8 @@ import HomepageFooter from "./HomepageFooter";
 
 import RecipeList from "../Results/RecipeList";
 
+
+// Heading content
 class HomepageHeading extends Component {
   render() {
     return (
@@ -40,14 +42,14 @@ class HomepageHeading extends Component {
     );
   }
 }
+// END Heading content
 
 HomepageHeading.propTypes = {
   mobile: PropTypes.bool
 };
 
-/* 
- * Custom Responsive containers
- */
+// Custom Responsive containers that swap between mobile & desktop
+ 
 export class DesktopContainer extends Component {
   state = {};
 
@@ -194,7 +196,9 @@ export class MobileContainer extends Component {
 MobileContainer.propTypes = {
   children: PropTypes.node
 };
+// END Custom Responsive containers that swap between mobile & desktop
 
+// Parent Container, rendering desktop/mobile components, and passing along props from top level.
 export class ResponsiveContainer extends Component {
   render() {
     return (
@@ -208,6 +212,8 @@ export class ResponsiveContainer extends Component {
           {this.props.results[0] ? "" : <HomepageBody2 />}
           <HomepageFooter />
         </DesktopContainer>
+
+        
         <MobileContainer updateResults={this.props.updateResults}>
           {this.props.results[0] ? (
             <RecipeList results={this.props.results} />

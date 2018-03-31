@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card, Icon, Image, Button, Modal, Header, List } from "semantic-ui-react";
 import axios from "axios";
-import RecipeItems from "./RecipeItems"
 
 export class RecipeCard extends Component {
   state = {
@@ -22,6 +21,8 @@ export class RecipeCard extends Component {
       console.log(error);
     }
   };
+
+  // removeFavorite()
 
   handleFavClick = () => {
     const incomingFavorite = {
@@ -99,7 +100,7 @@ export class RecipeCard extends Component {
               <Header>Ingredients</Header>
               <List bulleted>
                 {recipe.ingredients.map((ingredient, index) => {
-                return <RecipeItems {...ingredient} key={index} index={index} />;
+                return <List.Item {...ingredient} key={index} index={index}>{ingredient.text}</List.Item>
                 })}
               </List>              
             </Modal.Description>
